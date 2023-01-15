@@ -215,13 +215,27 @@ echo "${NEW_HOSTNAME}" >/mnt/etc/hostname
 if [[ "$(declare -p DNS_SERVERS 2>/dev/null)" =~ "declare -a" ]] && [ ${#DNS_SERVERS[@]} -ge 1 ]; then
 	echo "Setting DNS servers..."
 	for d in "${DNS_SERVERS[@]}"; do
-		echo "nameserver $d" >>/mnt/etc/resolv.conf.head
+		echo "nameserver $d" >>/mnt/etc/resolv.conf
 	done
 else
 	{
 		echo "nameserver 1.1.1.1"
 		echo "nameserver 1.0.0.1"
-	} >>/mnt/etc/resolv.conf.head
+	} >>/mnt/etc/resolv.conf
+fi
+
+# Prevent dhcpcd from highjacking /etc/resolv.conf
+echo "nohook resolv.conf" >>/mnt/etc/dhcpcd.conf
+
+# Also prevent connman from highjacking /etc/resolv.conf
+echo 'OPTS="--nodnsproxy"' >>/mnt/etc/runit/sv/connmand/conf
+if ! grep -q '[global]' /mnt/var/lib/connman/settings; then
+	echo '[global]' >>/mnt/var/lib/connman/settings
+fi
+if ! grep -q '^DNS=' /mnt/var/lib/connman/settings; then
+	sed -i '/^\[global\]/a DNS=off' /mnt/var/lib/connman/settings
+else
+	sed -i 's|DNS=.*|DNS=off|' /mnt/var/lib/connman/settings
 fi
 
 # Generate locale
@@ -262,7 +276,6 @@ if [[ -n "${WIRED_IFACE}" ]] && [[ "${ANY_CONFIGURABLE}" == "true" ]]; then
 		if [[ "${IPV6_CONFIGURABLE}" == "true" ]]; then
 			echo "IPv6 = ${IPV6_STATIC}/${IPV6_PREFIX}/${IPV6_GATEWAY}"
 		fi
-		echo "Nameservers = ${FMT_DNS}"
 	} >/mnt/var/lib/connman/static.config
 fi
 
