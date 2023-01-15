@@ -20,7 +20,6 @@ Things to keep in mind:
 - If you don't override `NEW_PASS`, then your new account password will be `artix`
 - `ufw` is installed by default but is not enabled by default. Don't forget to enable it!
 - I customize `neofetch` with some settings I think are nice, and have it run on login. Feel free to modify the configs if you don't like that, or simply remove `neofetch` from the `EXTRA_PKGS` install variable.
-- Take a look at `artixify-stage1.sh` to see which packages/PKGBUILD packages I include by default. Feel free to delete those lines or add your own.
-  - Since I made this script for myself, I include my own forked versions of some packages I like to use:
+- Take a look at `artixify-stage1.sh` to see which packages/PKGBUILD packages I include by default. Notably:
+  - [rsv](https://github.com/JojiiOfficial/rsv) - better frontend for `sv`, makes it way easier to manage runit services.
   - [svlogger](https://github.com/ubergeek77/svlogger) - auto-enable logging for runit services, written by bahamas10 and made into PKGBUILD by me.
-  - [vsv](https://github.com/ubergeek77/vsv) - better frontend for `sv`, written by bahamas10 and made into PKGBUILD by me.

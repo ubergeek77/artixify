@@ -198,7 +198,7 @@ default_env EXTRA_PKGS "bind-tools gnu-netcat jq neofetch net-tools nmap whois"
 if [[ -z "${PKGBUILD_REPOS}" ]]; then
 	declare -a PKGBUILD_REPOS=()
 	PKGBUILD_REPOS+=("https://aur.archlinux.org/yay.git")
-	PKGBUILD_REPOS+=("https://github.com/ubergeek77/vsv.git")
+	PKGBUILD_REPOS+=("https://aur.archlinux.org/rsv.git")
 	PKGBUILD_REPOS+=("https://github.com/ubergeek77/svlogger.git")
 fi
 
@@ -206,7 +206,7 @@ fi
 # that will be enabled by default
 # This is not intended to be modified;
 # Please use CUSTOM_SVC to define your own services to enable by default
-export DEFAULT_SVC="chrony cronie dhcpcd fail2ban sshd syslog-ng ufw connmand"
+export DEFAULT_SVC="chrony connmand cronie dhcpcd fail2ban ip6tables iptables sshd syslog-ng ufw"
 
 # Optional; additional runit services to configure to run at boot (space-separated)
 default_env CUSTOM_SVC ""
@@ -809,7 +809,6 @@ chroot /takeover/ /bin/sh -lc 'gcc /fakeinit.c -o /fakeinit'
 	echo "IPV6_STATIC=\"${IPV6_STATIC}\""
 	echo "IPV6_PREFIX=\"${IPV6_PREFIX}\""
 	echo "IPV6_GATEWAY=\"${IPV6_GATEWAY}\""
-	echo "FMT_DNS=\"${FMT_DNS}\""
 	echo "NEW_PUBKEY_STRING=\"${NEW_PUBKEY_STRING}\""
 ) >>/takeover/artixify.env
 
