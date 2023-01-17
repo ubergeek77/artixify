@@ -15,6 +15,9 @@ How to use
 - The server will reboot itself, and upon successful login, you'll find the install log at `/var/log/artixify.log` on the new system
 
 Things to keep in mind:
+- This is set up for `connman` to automatically detect the IP, but I've found that some VPSes don't support automatic DHCP.
+  - If your VPS doesn't support DHCP, and you don't set a static IP during setup, your server will reboot, but will be unreachable.
+  - Check to see if your VPS is using a static IP address, and make sure to set one with this script if it is.
 - You will need an SSH public key for which you have the private key. This is how you will SSH to your new system. Password logins are lame.
 - `root` is intentionally missing a password. The goal is to have you set one yourself with `sudo`
 - If you don't override `NEW_PASS`, then your new account password will be `artix`

@@ -568,37 +568,37 @@ show_summary() {
 			fi
 
 			if [[ -z "${IPV4_STATIC}" ]]; then
-				FMT_IPV4="Autodetect"
+				FMT_IPV4="Autodetect (WARN: not supported on some VPSes)"
 			else
 				FMT_IPV4="${IPV4_STATIC}"
 			fi
 
 			if [[ -z "${IPV4_GATEWAY}" ]]; then
-				FMT_IPV4_GATEWAY="Autodetect"
+				FMT_IPV4_GATEWAY="Autodetect (WARN: not supported on some VPSes)"
 			else
 				FMT_IPV4_GATEWAY="${IPV4_GATEWAY}"
 			fi
 
 			if [[ -z "${IPV4_NETMASK}" ]]; then
-				FMT_IPV4_NETMASK="Autodetect"
+				FMT_IPV4_NETMASK="Autodetect (WARN: not supported on some VPSes)"
 			else
 				FMT_IPV4_NETMASK="${IPV4_NETMASK}"
 			fi
 
 			if [[ -z "${IPV6_STATIC}" ]]; then
-				FMT_IPV6="Autodetect"
+				FMT_IPV6="Autodetect (WARN: not supported on some VPSes)"
 			else
 				FMT_IPV6="${IPV6_STATIC}"
 			fi
 
 			if [[ -z "${IPV6_PREFIX}" ]]; then
-				FMT_IPV6_PFX_LEN="Autodetect"
+				FMT_IPV6_PFX_LEN="Autodetect (WARN: not supported on some VPSes)"
 			else
 				FMT_IPV6_PFX_LEN="${IPV6_PREFIX}"
 			fi
 
 			if [[ -z "${IPV6_GATEWAY}" ]]; then
-				FMT_IPV6_GATEWAY="Autodetect"
+				FMT_IPV6_GATEWAY="Autodetect (WARN: not supported on some VPSes)"
 			else
 				FMT_IPV6_GATEWAY="${IPV6_GATEWAY}"
 			fi
